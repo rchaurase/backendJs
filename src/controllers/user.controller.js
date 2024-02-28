@@ -40,8 +40,7 @@ console.log(req.files)
 
   const avatar = await uploadOnCloudinary(avatarLocalPath);
   const coverImage = await uploadOnCloudinary(coverImageLocalPath);
-  console.log(avatar)
-  console.log(coverImage)
+  
 
 
   if(!avatar){
@@ -50,13 +49,13 @@ console.log(req.files)
 
   const user = await User.create({
     fullname,
-    avatar:avatar.url,
-    coverImage:coverImage?.url|| '',
+    avatar:avatar,
+    coverImage:coverImage || '',
     email,
     password,
     username:username.toLowerCase()
   })
-
+console.log(user)
   const createdUser = await User.findById(user._id).select(
     "-password -refreshToken"
   )
